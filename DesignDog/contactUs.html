@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>关于我们</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<!-- <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script> -->
+		<link rel="stylesheet" type="text/css" href="css/contact.css"/>
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center">	</header>
+		<main id='contactUs' v-cloak>
+			<div class="list-title flex-box align-center">首页 > 联系我们</div>
+			<div class="content-box">
+				<div class="map-box" id="map">
+					<img src="img/map.png" >
+				</div>
+				<div class="title thmeColor">
+					DesignDog<br>
+					博观达智品牌营销策划
+				</div>
+				<div class="thmeColor slim-title">邮箱：</div>
+				<div class="slim-content">{{ detail.email }}</div>
+				<div class="thmeColor slim-title">联系电话：</div>
+				<a class="slim-content" :href="'tel:'+detail.tel">{{ detail.tel }}</a>
+				<div class="thmeColor slim-title">联系地址：</div>
+				<div class="slim-content">{{ detail.address }}</div>
+			</div>
+			<div class="case-box">
+				<div class="txt thmeColor">Link</div>
+				<div class="list">
+					<div class="swiper-container" v-if='detail.link && detail.link.length > 0'>
+					    <div class="swiper-wrapper">
+							<a v-for="(item,i) in detail.link" :key='i' :href="item.link_url?item.link_url:'javaScript:;'" target="_blank" class="swiper-slide">
+								<div class="img-box flex-box align-center flex-center border_">
+									<img :src="imgUrl + item.link_cover" >
+								</div>
+								<div class="lines1 txt thmeColor">{{ item.link_name }}</div>
+							</a>
+					    </div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="line"></div>
+			<a href="joinUs.html" class="more-box border thmeColor">
+				加入我们 JOIN US<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		<footer></footer>
+		<script src="js/swiper-bundle.min.js"></script>
+		<script>
+			let that;
+			var vm = new Vue({
+				el: '#contactUs',
+				data: {
+					imgUrl: imgUrl,
+					detail:'',
+				},
+				mounted() {
+					that = this;
+					that.getDetail()
+				},
+				methods:{
+					getDetail(){
+						ajax('/api/config/contact').then(data=>{
+							if(data){
+								that.detail = data;
+								// var map = new BMapGL.Map('map'); // 创建Map实例
+								// map.centerAndZoom(new BMapGL.Point(data.longitude, data.latitude), 12); // 初始化地图,设置中心点坐标和地图级别
+								// map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
+								
+								// var point = new BMapGL.Point(data.longitude, data.latitude);       //设置在哪个坐标创建标注
+								// var icon = new BMapGL.Icon("img/11.png", new BMapGL.Size(60, 60))   //设计给的标注图片是60*60的。具体大小根据实际设置
+								// var marker = new BMapGL.Marker(point , {
+								// 	icon: icon ,// 创建标注
+								// })
+								// var icon = new BMapGL.Icon("images/mapPosition.svg", new BMapGL.Size(60, 60),{
+								// 	offset:new BMapGL.Size(30,60),// 图标中央下端的尖角位置。
+								// });
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper-container',{
+										slidesPerView: 3
+									})
+								},33)
+							}
+							$('.loding').hide()
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+	<script type="text/javascript">
+	</script>
+</html>

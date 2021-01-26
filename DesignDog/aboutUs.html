@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>关于我们</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" href="css/aboutUs.css">
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		<main id='aboutUs' v-cloak>
+			<div class="line fixed"></div>
+			<div class="swiper-container" v-if='banner && banner.length > 0'>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide " v-for="(item,i) in banner" :key='i'>
+						<a :href="item.banner_url?item.banner_url:'javaScript:;'" class="top-box flex flex-box align-center" :style="{
+							'background': 'url('+imgUrl + item.banner_image +') no-repeat center',
+							'background-size': 'cover'}">
+							<div>
+								<div class="title thmeColor">{{ item.banner_title }}</div>
+								<div class="info thmeColor">{{ item.banner_info }}</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			
+			
+			<!-- <div class="top-box" v-if='banner && banner.length > 0' :style="{
+				'background': 'url('+imgUrl + ') no-repeat center',
+				'background-size': 'cover'}">
+				<div class="title thmeColor">
+					中国农旅文融合的品牌运营先行者
+				</div>
+				<div class="info thmeColor">
+					设计是产品/品牌/业态的
+					价值放大器和价值交换枢纽。
+				</div>
+			</div> -->
+			
+			
+			
+			
+			<div class="list-title flex-box align-center">关于我们 > 
+				<template v-if='type == 1'>公司简介</template>
+				<template v-if='type == 2'>服务内容</template>
+				<template v-if='type == 3'>设计狗方法论</template>
+				<template v-if='type == 4'>领军人物</template>
+				<template v-if='type == 5'>专家团队</template>
+			</div>
+			
+			<div class="rich-box" v-if='type == 3'></div>
+			<div class="Leaders" v-if='type == 4 || type == 5'>
+				<div class="Leader-box" v-if="Leaders && Leaders.length > 0" v-for="(item,i) in Leaders" :key='i'>
+					<div class="Leader">
+						<div class="title-en">Finder</div>
+						<div class="Leader-name text-color">{{ item.name }}</div>
+						<div class="Leader-photo" :style="{
+							'background': 'url('+imgUrl + item.image + ') no-repeat center',
+							'background-size': 'cover'}">
+						</div>
+						<div class="Leader-info thmeColor" v-html="item.info"></div>
+					</div>
+				</div>
+			</div>
+			<div class="list" v-else>
+				<div class="item" v-for="(item,index) in focus" :key='index'>
+					<div class="title thmeColor">{{ item.title }}</div>
+					<div class="info" v-html="item.content"></div>
+				</div>
+			</div>
+			<div class="line"></div>
+			<a href="productList.html" class="more border thmeColor">
+				查看案例 case<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		<footer></footer>
+	</body>
+	<script src="js/swiper-bundle.min.js"></script>
+	<script>
+		let that;
+		var vm = new Vue({
+			el: '#aboutUs',
+			data: {
+				imgUrl: imgUrl,
+				banner: [],
+				type:'',
+				Leaders:[],
+				focus:[]
+			},
+			mounted() {
+				that = this;
+				that.type = getUrlParam('type');
+				if(that.type == 5){
+					that.getTeam()
+				}
+				if(that.type == 4){
+					that.getLeader()
+				}
+				if(that.type == 3){
+					that.getDetail()
+				}
+				if(that.type == 2){
+					that.getFocus()
+				}
+				if(that.type == 1){
+					that.getIntroduce()
+					
+				}
+			},
+			methods:{
+				getFocus(){
+					ajax('/api/aboutUs/focus',{
+						limit:999,
+						page: 1
+					},'','1').then(res=>{
+						if(res.data && res.data.length > 0){
+							that.focus = res.data
+						}
+						if(res.banner && res.banner.length > 0){
+							that.banner = res.banner
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container',{
+									// pagination: {
+									//    el: '.swiper-pagination',
+									// }
+								})
+							},33)
+						}
+						$('.nav-active-3').addClass('active')
+						$('.loding').hide()
+					})
+				},
+				getIntroduce(){
+					ajax('/api/aboutUs/introduce',{
+						limit:999,
+						page: 1
+					},'','1').then(res=>{
+						if(res.data && res.data.length > 0){
+							that.focus = res.data
+						}
+						if(res.banner && res.banner.length > 0){
+							that.banner = res.banner
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container',{
+									// pagination: {
+									//    el: '.swiper-pagination',
+									// }
+								})
+							},33)
+						}
+						$('.nav-active-1').addClass('active')
+						$('.loding').hide()
+					})
+				},
+				getLeader(){
+					ajax('/api/aboutUs/leader',{
+						limit:999,
+						page: 1
+					},'','1').then(res=>{
+						if(res.data && res.data.length > 0){
+							that.Leaders = res.data
+						}
+						if(res.banner && res.banner.length > 0){
+							that.banner = res.banner
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container',{
+									// pagination: {
+									//    el: '.swiper-pagination',
+									// }
+								})
+							},33)
+						}
+						$('.nav-active-2').addClass('active')
+						$('.loding').hide()
+					})
+				},
+				getTeam(){
+					ajax('/api/aboutUs/group',{
+						limit:999,
+						page: 1
+					},'','1').then(res=>{
+						if(res.data && res.data.length > 0){
+							that.Leaders = res.data
+						}
+						if(res.banner && res.banner.length > 0){
+							that.banner = res.banner
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container',{
+									// pagination: {
+									//    el: '.swiper-pagination',
+									// }
+								})
+							},33)
+						}
+						$('.nav-active-7').addClass('active')
+						$('.loding').hide()
+					})
+				},
+				getDetail(){
+					ajax('/api/aboutUs/method','','','1').then(res=>{
+						if(res.banner && res.banner.length > 0){
+							that.banner = res.banner
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container',{
+									// pagination: {
+									//    el: '.swiper-pagination',
+									// }
+								})
+							},33)
+						}
+						if(res.data.about_us){
+							let txt = richTxt(res.data.about_us)
+							$('.rich-box').html(txt)
+						}
+						$('.nav-active-4').addClass('active')
+						$('.loding').hide()
+					})
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,160 @@
+#product .top-new {
+  height: 56.27vw;
+  position: relative;
+}
+#product .top-new .img-box {
+  width: 100%;
+  height: 100%;
+}
+#product .top-new .msg {
+  padding: 2.4vw 4.8vw;
+}
+#product .new-date {
+  font-weight: 300;
+  font-size: 2.93vw;
+  line-height: 125%;
+  /* identical to box height, or 14px */
+  color: #999999;
+}
+#product .new-title {
+  font-weight: 500;
+  font-size: 4.26vw;
+  line-height: 141%;
+  margin: 1.33vw 0;
+}
+#product .new-info {
+  font-size: 3.2vw;
+  line-height: 159.5%;
+  /* or 19px */
+  letter-spacing: 0.07em;
+}
+#product .swiper-container2 {
+  margin: 0 4.8vw;
+  position: relative;
+}
+#product .swiper-container2::before {
+  content: '';
+  right: 0;
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  z-index: 3;
+  background: linear-gradient(to left, #131310, rgba(0, 0, 0, 0.2));
+}
+#product .swiper-container2 .swiper-wrapper {
+  padding: 2.93vw 0;
+  font-size: 3.2vw;
+  line-height: 142%;
+}
+#product .swiper-container2 .swiper-wrapper .swiper-slide {
+  width: auto;
+}
+#product .swiper-container2 .swiper-wrapper .className {
+  font-weight: 500;
+  opacity: 0.7;
+  cursor: pointer;
+}
+#product .swiper-container2 .swiper-wrapper .className:hover {
+  opacity: 1;
+}
+#product .swiper-container2 .swiper-wrapper .picker {
+  cursor: pointer;
+  opacity: 0.7;
+}
+#product .swiper-container2 .swiper-wrapper .picker .year {
+  padding: 0 2.5vw 0 3.2vw;
+}
+#product .swiper-container2 .swiper-wrapper .picker:hover {
+  opacity: 1;
+}
+#product .swiper-container2 .swiper-wrapper .show {
+  opacity: 1;
+}
+#product .swiper-container2 .swiper-wrapper .icon-xiangxia {
+  font-weight: 400;
+}
+#product .swiper-container2 .swiper-wrapper .search {
+  height: 6.93vw;
+}
+#product .swiper-container2 .swiper-wrapper .search input {
+  border: none;
+  outline: none;
+  background: none;
+  height: 100%;
+  width: 13.87vw;
+  padding: 0 2.4vw;
+  transition: all 0.3s;
+}
+#product .swiper-container2 .swiper-wrapper .search .icon-box {
+  width: 6.93vw;
+  height: 100%;
+}
+#product .swiper-container2 .swiper-wrapper .search .active {
+  width: 37.33vw;
+}
+#product .swiper-container2 .swiper-wrapper .search .active + div {
+  background: linear-gradient(270deg, #CC964E 0%, #EEC988 100%);
+}
+#product .swiper-container2 .swiper-wrapper .search .active + div span {
+  color: #131310;
+}
+#product .my-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#product .my-picker .swiper-container {
+  height: 56.53vw;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(19, 19, 16, 0.95);
+  border: 1px solid #EEC988;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0px 0px;
+}
+#product .my-picker .swiper-container .swiper-slide {
+  height: 9.33vw;
+  line-height: 9.33vw;
+  text-align: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 4.8vw;
+  opacity: 0.6;
+}
+#product .my-picker .swiper-container .swiper-slide .iconfont {
+  display: none;
+}
+#product .my-picker .swiper-container .swiper-slide .icon-xiangyou {
+  padding-left: 11.73vw;
+}
+#product .my-picker .swiper-container .swiper-slide .icon-xiangzuo {
+  margin-right: 11.73vw;
+}
+#product .my-picker .swiper-container .p1 {
+  opacity: 1;
+}
+#product .my-picker .swiper-container .p1 .iconfont {
+  display: block;
+}
+#product .list {
+  padding: 4.8vw;
+  min-height: 54.67vw;
+}
+#product .list .item {
+  margin-bottom: 8vw;
+  display: block;
+}
+#product .list .item .img-box {
+  display: block;
+  height: 56.27vw;
+}
+#product .list .item .new-info {
+  font-weight: 300;
+  font-size: 3.2vw;
+  margin-top: 1.33vw;
+}

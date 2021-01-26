@@ -1,0 +1,79 @@
+#newDetail .detail {
+  padding: 4.8vw;
+}
+#newDetail .detail .title {
+  font-size: 5.33vw;
+  line-height: 140%;
+  letter-spacing: 0.05em;
+  padding-bottom: 2.67vw;
+}
+#newDetail .detail .date {
+  font-weight: 400;
+  font-size: 2.93vw;
+  line-height: 140%;
+  margin-top: 2.67vw;
+}
+#newDetail .detail .info {
+  margin: 5.33vw 0;
+  font-size: 3.2vw;
+  line-height: 159.5%;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+}
+#newDetail .detail .rich-box {
+  margin: 3.125vw auto;
+  font-size: 3.2vw;
+  line-height: 159.5%;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+}
+#newDetail .detail .rich-box img {
+  max-width: 100%;
+  display: inline-block;
+}
+#newDetail .detail .back-box span {
+  margin-right: 6.93vw;
+  font-size: 2.93vw;
+  line-height: 150%;
+  letter-spacing: 0.115em;
+}
+#newDetail .list {
+  padding-top: 5.33vw;
+  margin-top: 13.33vw;
+  border-top: 0.5px dashed #EEC988;
+}
+#newDetail .list .title {
+  font-weight: 600;
+  font-size: 5.87vw;
+  line-height: 153.5%;
+}
+#newDetail .list .item {
+  margin-bottom: 8vw;
+  display: block;
+}
+#newDetail .list .item .img-box {
+  height: 56.27vw;
+}
+#newDetail .list .item .new-info {
+  color: white;
+  margin-top: 1.33vw;
+}
+#newDetail .list .item .new-date {
+  font-weight: 300;
+  font-size: 2.93vw;
+  line-height: 125%;
+  /* identical to box height, or 14px */
+  color: #999999;
+}
+#newDetail .list .item .new-title {
+  font-weight: 500;
+  font-size: 5.87vw;
+  line-height: 141%;
+  margin: 1.33vw 0;
+}
+#newDetail .list .item .new-info {
+  font-size: 3.2vw;
+  line-height: 159.5%;
+  /* or 19px */
+  letter-spacing: 0.07em;
+}

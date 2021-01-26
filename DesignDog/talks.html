@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>老狗讲坛</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/talks.css"/>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#footer").load("public/footer.html");
+			});
+		</script>
+	</head>
+
+	<body>
+		<header class="flex-box align-center">
+			<div class="fixed-header isPc">
+				<div class="my-contain-lg flex-box flex-between align-center">
+					<img src="img/logo.png" class="LOGO">
+					
+					<div class="nav-list flex-box">
+						<a href="index.html" class="nav-item">首页</a>
+						<a href="newsList.html" class="nav-item">新闻专栏</a>
+						<a href="aboutUs.html" class="nav-item">关于我们</a>
+						<a href="productList.html" class="nav-item">作品展馆</a>
+						<a href="talks.html" class="nav-item active">老狗讲坛</a>
+						<a href="contactUs.html" class="nav-item">联系我们
+							<div class="list2">
+								<object>
+									<a href="joinUs.html" class="">加入我们</a>
+								</object>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main id='aboutUs'>
+			
+			<div class="swiper-container" v-if='banner.length > 0'>
+			    <div class="swiper-wrapper">
+			      <a :href="item.banner_url" target="_blank" class="swiper-slide" v-for="(item,index) in banner" :key='index' :style="{
+					'background': 'url('+imgUrl + item.banner_image+') no-repeat center',
+					'background-size': 'cover'}" ></a>
+			    </div>
+			</div>
+			<div v-if='detail.info' :style="{'background': 'url('+imgUrl + detail.info.background+') no-repeat','background-size': '100% auto'}">
+				<div class="my-contain-lg content-box">
+					<p class="info" v-html="detail.info.info"></p>
+					
+					<img class="img" :src="imgUrl + detail.info.author.image" >
+					
+					<div class="talker">{{ detail.info.author.name }}</div>
+					<div class="user-intro">{{ detail.info.author.info }}</div>
+					
+					<template  v-if='detail.info.video'>
+						<video :src="imgUrl + detail.info.video" controls="controls">
+							当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+						</video>
+						<div class="video-name">{{ detail.info.title }}</div>
+					</template>
+					<div class="rich-box" v-html="detail.info.content"></div>
+					
+					<div class="video-info">
+						主要制作人员名单：{{ detail.info.producer }}
+						<br><br>
+						制作时间：{{ detail.info.publish_time }}
+						<br><br>
+						下期预告：{{ detail.info.next }}
+					</div>
+					
+					<img src="./img/dog1.png" class="img2">
+					
+					<template v-if='detail.other && detail.other.length > 0'>
+						<div class="more-btn">
+							更多精彩内容 OTHER SHOW
+						</div>
+						
+						<div class="list">
+							<img src="img/trangle.png" class="trangle">
+							<div class="item flex-box" v-for='(item,index) in detail.other' :key='index'>
+								<div class="art-img" :style="{
+									'background': 'url('+ imgUrl + item.speech_cover+') no-repeat center',
+									'background-size': 'cover'}" ></div>
+								<div class="flex art-box flex-box">
+									<div class="lines1 title">
+										{{ item.title }}
+									</div>
+									<div class="time">
+										{{ item.publish_time }}
+									</div>
+									<div class="art-info lines2">
+										{{ item.info }}
+									</div>
+								</div>
+								<div class="btn flex-box align-center" @click="getDetail(item.speech_id)">
+									<span>查看详情</span>
+									<svg width="36" height="4" viewBox="0 0 36 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M35.1768 2.17678C35.2744 2.07915 35.2744 1.92086 35.1768 1.82323L33.5858 0.232236C33.4882 0.134605 33.3299 0.134605 33.2322 0.232236C33.1346 0.329867 33.1346 0.488158 33.2322 0.585789L34.6464 2L33.2322 3.41422C33.1346 3.51185 33.1346 3.67014 33.2322 3.76777C33.3299 3.8654 33.4882 3.8654 33.5858 3.76777L35.1768 2.17678ZM-2.18557e-08 2.25L35 2.25L35 1.75L2.18557e-08 1.75L-2.18557e-08 2.25Z" fill="black"/>
+									</svg>
+						
+								</div>
+							</div>
+							<div class="pullrefresh">
+								<img src="img/loading.png" class="loading">
+								<span>下滑查看更多</span>
+							</div>
+						</div>
+					</template>
+					
+				</div>
+			</div>
+		</main>
+		<script src="js/swiper-bundle.min.js"></script>
+		
+		<div id="footer"></div>
+		<script>
+			let that;
+			var vm = new Vue({
+				el: '#aboutUs',
+				data: {
+					imgUrl: imgUrl,
+					banner:[],
+					detail:''
+				},
+				mounted() {
+					that = this;
+					that.getBanner()
+				},
+				methods:{
+					getDetail(id){
+						that.detail = ''
+						window.scroll(0,0)
+						ajax('/api/speech/index',{
+							id: id
+						}).then(data=>{
+							if(data){
+								that.detail = data
+								data.info.info = richTxt(data.info.info)
+								data.info.content = richTxt(data.info.content)
+							}
+							$('.loding').hide()
+						})
+					},
+					getBanner(){
+						ajax('/api/banner/list',{
+							banner_type: 1, // 1 pc 2mobile
+							banner_position: 3 ,//1 首页 2关于我们 3 论坛
+						}).then(data=>{
+							if(data){
+								that.banner = data;
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper-container');
+								},400)
+							}
+							that.getDetail('')
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+	<script type="text/javascript">
+	</script>
+</html>

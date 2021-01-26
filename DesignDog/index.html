@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<link rel="stylesheet" href="css/animate.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+	<body>
+		<div id="index" class="flex-box" v-cloak>
+			<header class="flex-box align-center"></header>
+			<div class="flex">
+				<div class="swiper-container swiper" v-if='pageData.banner && pageData.banner.length > 0'>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="(item,index) in pageData.banner" :key='index'>
+							<div class="first-box flex flex-box flex-center"  :style="{
+								'background': 'url('+imgUrl + item.banner_image+') no-repeat center',
+								'background-size': 'cover'
+							}">
+								<div>
+									<div class="title text-color">{{ item.banner_title }}</div>
+									<div class="info text-color lines2">{{ item.banner_info }}</div>
+									<a :href="item.banner_url?item.banner_url:'JavaScript:;'" class="more thmeColor text-bg">查看详情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-pagination swipe-pagination" style="position: absolute;"></div>
+				</div>
+				<div v-if='pageData.works && pageData.works.length > 0'>
+					<div class="second-box text-bg" v-for="(it,i) in pageData.works" :key='i'>
+						<div class="title-en thmeColor">
+							DESIGNDOG<br>WORKS
+						</div>
+						<div class="title-zh thmeColor">
+							{{ it.type_name }}
+						</div>
+						<div class="title-en-mini">
+							<!-- case -->
+							{{ it.etype_name }}
+						</div>
+						<div class="swiper-container" :class="'work-'+i" v-if='it.list && it.list.length > 0'>
+							<div class="swiper-wrapper">
+								<a :href="'productDetail.html?id='+item.id" class="swiper-slide" v-for="(item,index) in it.list" :key='index'>
+									<div class="banner-box flex"  :style="{
+										'background': 'url('+imgUrl + item.cover+') no-repeat center',
+										'background-size': 'cover'
+									}">
+									</div>
+									<div class="info">{{ item.title }}</div>
+								</a>
+							</div>
+							<template v-if='it.list.length > 1'>
+								<div class="swiper-button-next" ontouchstart='$(this).addClass("active thmeColor")' 
+									ontouchend='$(this).removeClass("active thmeColor")'>
+									<span class="iconfont icon-xiangyou"></span>
+								</div>
+								<div class="swiper-button-prev" ontouchstart='$(this).addClass("active thmeColor")' 
+									ontouchend='$(this).removeClass("active thmeColor")'>
+									<span class="iconfont icon-xiangzuo"></span>
+								</div>
+							</template>
+						</div>
+						<div class="swiper-pagination flex-box flex-center" :class="'work-pagination'+i"></div>
+					</div>
+				</div>
+			
+				<div class="third-box text-bg" v-if='pageData && pageData.news'>
+					<div class="msg">
+						<div class="title-en thmeColor">
+							DESIGNDOG<br>DYNAMIC
+						</div>
+						<div class="title-zh thmeColor">最新动态</div>
+						<div class="title-en-mini">news</div>
+					</div>
+				
+					<a :href="'newsDetail.html?id='+pageData.news[0].id" class="banner-box flex"  :style="{
+						'background': 'url('+ imgUrl + pageData.news[0].cover +') no-repeat center',
+						'background-size': 'cover'}">
+					</a>
+					
+					<div class="new-box">
+						<a :href="'newsDetail.html?id='+pageData.news[0].id">
+							<!-- <div class="title-en-mini">市调是设计基础</div> -->
+							<div class="title-news">{{ pageData.news[0].title }}</div>
+							<div class="info-news thmeColor">{{ pageData.news[0].english_publish_time}}</div>
+							<div class="desc-news thmeColor">{{ pageData.news[0].info }}</div>
+						</a>
+						<div class="list border-top">
+							<a :href="'newsDetail.html?id='+item.id" class="item flex-box align-center border-bottom"
+							 v-for="(item,index) in pageData.news" :key='index'>
+								<div class="img-box"  :style="{
+									'background': 'url('+imgUrl + item.cover+') no-repeat center',
+									'background-size': 'cover'}">
+								</div>
+								<div class="flex">
+									<div class="date">
+										<span class="title-en-mini">{{ item.short_publish_time }}</span>
+										<span class="title-en-mini">新闻专栏</span>
+									</div>
+									<div class="lines2 info">{{ item.title }}</div>
+								</div>
+								<span class="iconfont icon-xiangyou thmeColor"></span>
+							</a>
+						</div>
+						<a href="newsList.html" class="more-box border thmeColor">
+							查看更多 MORE<span class="iconfont icon-jiantou_xiangyou_o"></span>
+						</a>
+					</div>
+				</div>
+				
+				
+				
+				<div v-if='pageData.article && pageData.article.length > 0'>
+					<div class="six-box text-bg">
+						<div class="title-en text-color">
+							DESIGNDOG<br>VIEW
+						</div>
+						<div class="title-zh text-color">
+							最新文章
+						</div>
+						<div class="title-en-mini">
+							essay
+						</div>
+						<div class="swiper-container news">
+							<div class="swiper-wrapper">
+								<a :href="'newsDetail.html?type=1&id='+item.id" class="swiper-slide" v-for="(item,index) in pageData.article" :key='index'>
+									<div class="banner-box flex"  :style="{
+										'background': 'url('+imgUrl + item.cover+') no-repeat center',
+										'background-size': 'cover'
+									}">
+									</div>
+									<div class="title lines1 text-color">{{ item.title }}</div>
+									<div class="info lines1 text-color">{{ item.info }}</div>
+								</a>
+							</div>
+							
+							<div class="swiper-button-next" ontouchstart='$(this).addClass("active thmeColor")' 
+								ontouchend='$(this).removeClass("active thmeColor")'>
+								<span class="iconfont icon-xiangyou"></span>
+							</div>
+							<div class="swiper-button-prev" ontouchstart='$(this).addClass("active thmeColor")' 
+								ontouchend='$(this).removeClass("active thmeColor")'>
+								<span class="iconfont icon-xiangzuo"></span>
+							</div>
+						</div>
+						<div class="swiper-pagination flex-box flex-center news-pagination"></div>
+					
+						<a href="point.html" class="more-box text-color text-border">
+							查看更多 MORE <span class="iconfont icon-jiantou_xiangyou_o"></span>
+						</a>
+					</div>
+					
+				</div>
+				
+				
+				<div class="four-box" v-if='pageData.focus && pageData.focus.length > 0'>
+					<div class="msg">
+						<div class="title-en thmeColor">
+							DESIGNDOG<br>FOUCS
+						</div>
+						<div class="title-zh thmeColor">
+							我们专注于解决如下问题
+						</div>
+						<div class="title-en-mini">
+							service
+						</div>
+					</div>
+					<div class="list flex-box flex-between">
+						<div class="item flex-box text-bg" v-for='(f,i) in pageData.focus'>
+							<span class="thmeBg"></span>
+							<div>{{ f }}</div>
+						</div>
+					</div>
+					<a href="aboutUs.html?type=1" class="more-box text-color text-border">
+						查看更多 MORE <span class="iconfont icon-jiantou_xiangyou_o"></span>
+					</a>
+				</div>
+				
+				<div class="five-box text-bg">
+					<div class="msg">
+						<div class="title-en thmeColor">
+							DESIGNDOG<br>CONTACT
+						</div>
+						<div class="title-zh thmeColor">
+							联系方式
+						</div>
+						<div class="title-en-mini">
+							contact
+						</div>
+					</div>
+				</div>
+				
+				<footer></footer>
+			</div>
+		</div>
+		
+		<script src="js/swiper-bundle.min.js"></script>
+		<script src="js/swiper.animate1.0.3.min.js"></script>
+		<script>
+			let that;
+			var vm = new Vue({
+				el: '#index',
+				data: {
+					imgUrl: imgUrl,
+					current: 0,
+					pageData:''
+				},
+				methods:{
+					getPagaData(){
+						ajax('/api/banner/list',{
+							banner_type: 1, // 1 pc 2mobile
+							banner_position:1 ,//1 首页 2关于我们 3 论坛
+						}).then(data=>{
+							if(data){
+								that.pageData = data
+								that.banner = data;
+								if(that.pageData.works){
+									that.pageData.works.forEach((item,index)=>{
+										var swipe = 'swipe'+index
+										setTimeout(()=>{
+											swipe = new Swiper('.work-'+index, {
+												duration: 500,
+												autoplay:true,
+												loop: true,
+												pagination: {
+													el: '.work-pagination'+index,
+													clickable: true
+												},
+												 navigation: {
+												        nextEl: '.swiper-button-next',
+												        prevEl: '.swiper-button-prev',
+												 },
+											});
+										},100)
+									})
+								}
+								if(that.pageData.article){
+									setTimeout(()=>{
+										var swipe_new = new Swiper('.news', {
+											duration: 500,
+											autoplay:true,
+											loop: true,
+											pagination: {
+												el: '.news-pagination',
+												clickable: true
+											},
+											 navigation: {
+											        nextEl: '.swiper-button-next',
+											        prevEl: '.swiper-button-prev',
+											 },
+										});
+									},100)
+								}
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper', {
+										duration: 500,
+										pagination: {
+											el: '.swipe-pagination',
+											clickable: true,
+										},
+									});
+								},62)
+							}
+							$('.loding').hide()
+						})
+					}
+				},
+				mounted() {
+					that = this;
+					that.getPagaData()
+				}
+			})
+		</script>
+	</body>
+</html>

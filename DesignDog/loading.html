@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<link rel="stylesheet" href="css/animate.min.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+	</head>
+	<style type="text/css">
+		body,html{height: 100%;font-size: initial;}
+		.loading{height: 100%;text-align: center;}
+		.logo-box{position: relative;margin-bottom: 15px;}
+		.logo-border{width: 115px;position: relative;z-index: 2;}
+		.logo-color1{position: absolute;left: 54px;top: 17px;height: 42px;}
+		.logo-color2{position: absolute;right: 47px;top: 15px;width: 28px;}
+		.logo-font img{width: 60px;line-height: initial;}
+	</style>
+	<body>
+		<!-- <div onclick='window.location.href="index.html"' class="loading flex-box align-center flex-center swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide flex-center flex-box align-center">
+					<div>
+						<div class="logo-box">
+							<img src="img/33.png" class="logo-border ani" swiper-animate-effect="rotateInUpRight" swiper-animate-duration="1s" swiper-animate-delay="0.1s">
+							<img src="img/11.png" class="logo-color1 ani" swiper-animate-effect="rotateInUpRight" swiper-animate-duration="1.3s" swiper-animate-delay="0.1s">
+							<img src="img/22.png" class="logo-color2">
+						</div>
+						<div class="logo-font">
+							<img src="img/logo-she.png" class="ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="0.5s">
+							<img src="img/logo-ji.png" class="ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="1s" >
+							<img src="img/logo-gou.png" class="ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="1.5s" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+	<script src="js/swiper-bundle.min.js"></script>
+	<script src="js/swiper.animate1.0.3.min.js"></script>
+	</body>
+	<script type="text/javascript">
+	var mySwiper = new Swiper('.swiper-container',{
+	    on:{
+	      init: function(){
+	        swiperAnimateCache(this); 
+	        swiperAnimate(this);
+	      }, 
+	      slideChangeTransitionEnd: function(){ 
+	        swiperAnimate(this);
+	      } 
+	    }
+	  });
+	  // setTimeout(()=>{
+		 window.location.replace('index.html') 
+	  // },3000)
+	</script>
+</html>

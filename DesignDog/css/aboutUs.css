@@ -1,0 +1,87 @@
+#aboutUs .top-box {
+  height: 64vw;
+  padding: 13vw 0 0 7.2vw;
+}
+#aboutUs .top-box .title {
+  font-weight: 500;
+  font-size: 8vw;
+  line-height: 142%;
+  width: 70.13vw;
+  margin-bottom: 2.67vw;
+}
+#aboutUs .top-box .info {
+  width: 43.73vw;
+  font-weight: normal;
+  font-size: 3.2vw;
+  line-height: 142%;
+}
+#aboutUs .list {
+  padding: 1.6vw 4.8vw 10.67vw;
+}
+#aboutUs .list .item {
+  padding: 4.27vw 0;
+  border-bottom: 0.5px dashed #EEC988;
+}
+#aboutUs .list .item .title {
+  font-weight: 500;
+  font-size: 3.73vw;
+  line-height: 143%;
+  margin-bottom: 4vw;
+}
+#aboutUs .list .item .info {
+  font-weight: normal;
+  font-size: 3.2vw;
+  line-height: 142%;
+  color: #FFFFFF;
+  text-align: justify;
+}
+#aboutUs .more {
+  width: 55.5vw;
+  line-height: 30px;
+  font-size: 3.2vw;
+  text-align: center;
+  display: block;
+  font-weight: 200;
+  margin: 8vw auto;
+}
+#aboutUs .more .iconfont {
+  float: right;
+  padding-right: 2.67vw;
+}
+#aboutUs .rich-box {
+  margin: 11.2vw 4.8vw;
+}
+#aboutUs .Leaders {
+  margin: 8.53vw 4.8vw 16vw;
+}
+#aboutUs .Leaders .Leader-box {
+  padding: 1px;
+  background: linear-gradient(#EDC886, #62553A, #EDC886);
+  margin-bottom: 11.2vw;
+}
+#aboutUs .Leaders .Leader {
+  padding: 4.8vw;
+  background: linear-gradient(180deg, #EDC886, rgba(237, 200, 134, 0), #131310, #131310);
+}
+#aboutUs .Leaders .Leader .title-en {
+  font-weight: 300;
+  font-size: 6.93vw;
+  line-height: 139%;
+  color: rgba(19, 19, 16, 0.6);
+}
+#aboutUs .Leaders .Leader .Leader-name {
+  font-weight: 600;
+  font-size: 5.33vw;
+  line-height: 140%;
+  margin-bottom: 4vw;
+}
+#aboutUs .Leaders .Leader .Leader-photo {
+  width: 100%;
+  height: 104vw;
+}
+#aboutUs .Leaders .Leader .Leader-info {
+  margin-top: 4.8vw;
+  font-style: normal;
+  font-size: 3.2vw;
+  line-height: 167%;
+}

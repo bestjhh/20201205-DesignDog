@@ -1,0 +1,178 @@
+.swiper-container {
+  height: 31.77vw;
+}
+.content-box {
+  padding: 5.73vw 0 1.56vw;
+  overflow: hidden;
+}
+.content-box h2 {
+  font-size: 2.08vw;
+  font-weight: normal;
+  color: #333333;
+}
+.content-box .info {
+  margin: 0 auto 5.21vw;
+  width: 47.92vw;
+  font-size: 0.94vw;
+  text-align: center;
+}
+.content-box .img {
+  display: block;
+  margin: 0 auto 2.08vw;
+  width: 23.96vw;
+}
+.content-box .talker {
+  font-size: 1.88vw;
+  text-align: center;
+  color: #333333;
+  line-height: 2.4vw;
+  margin-bottom: 0.52vw;
+}
+.content-box .user-intro {
+  font-size: 1.04vw;
+  line-height: 1.3vw;
+  letter-spacing: 0.115em;
+  color: #999999;
+  text-align: center;
+}
+.content-box video {
+  display: block;
+  width: 100%;
+  height: 35.16vw;
+  margin: 5.73vw auto 1.82vw;
+}
+.content-box .video-name {
+  font-size: 1.67vw;
+  line-height: 2.19vw;
+  text-align: center;
+  letter-spacing: 0.115em;
+  color: #999999;
+}
+.content-box .rich-box {
+  width: 100%;
+  min-height: 5.21vw;
+  margin: 6.25vw auto;
+}
+.content-box .video-info {
+  font-weight: 290;
+  font-size: 0.83vw;
+  text-align: center;
+  line-height: 1.04vw;
+  letter-spacing: 0.115em;
+  color: #000000;
+}
+.content-box .img2 {
+  display: block;
+  width: 10.42vw;
+  margin: 3.65vw auto;
+}
+.content-box .more-btn {
+  background-color: #FFFFFF;
+  width: 16.41vw;
+  text-align: center;
+  padding: 0.73vw 0;
+  margin: 0 auto;
+  border: 1px solid #C4C4C4;
+  font-size: 0.94vw;
+  line-height: 1.25vw;
+  /* identical to box height */
+  letter-spacing: 0.115em;
+  color: #666666;
+}
+.content-box .list {
+  padding: 0.78vw 3.65vw;
+  margin-top: 2.19vw;
+  background-color: #FFFFFF;
+  background: #FEFEFE;
+  border: 1px solid #E0E0E0;
+  box-shadow: 3px 6px 4px 8px rgba(200, 200, 200, 0.05);
+  position: relative;
+}
+.content-box .list .trangle {
+  width: 1.04vw;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -1.2vw;
+}
+.content-box .list .item {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.6);
+  padding: 1.56vw 0;
+}
+.content-box .list .item .art-img {
+  width: 6.77vw;
+  height: 4.48vw;
+  min-height: 60px;
+  min-width: 80px;
+  margin-right: 0.94vw;
+}
+.content-box .list .item .art-box {
+  width: calc(100% - 25.52vw);
+  flex-direction: column;
+}
+.content-box .list .item .art-box .title {
+  font-family: Microsoft YaHei UI;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 0.73vw;
+  /* identical to box height */
+  letter-spacing: 0.15em;
+  color: #333333;
+}
+.content-box .list .item .art-box .time {
+  font-family: Microsoft YaHei UI;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 10px;
+  line-height: 13px;
+  /* identical to box height */
+  margin: 4px 0 0.73vw;
+  letter-spacing: 0.15em;
+  color: #999999;
+}
+.content-box .list .item .art-box .art-info {
+  font-family: Microsoft YaHei UI;
+  font-style: normal;
+  font-weight: 290;
+  font-size: 12px;
+  letter-spacing: 0.29em;
+  color: #666666;
+}
+.content-box .list .item .btn {
+  width: 6.41vw;
+  height: 1.88vw;
+  border: 1px solid #C4C4C4;
+  justify-content: center;
+  align-self: center;
+  margin-left: 11.46vw;
+  cursor: pointer;
+  min-width: 110px;
+  min-height: 30px;
+}
+.content-box .list .item .btn:hover {
+  border: 1px solid #F4D924;
+}
+.content-box .list .item .btn span {
+  font-size: 10px;
+  line-height: 13px;
+  /* identical to box height */
+  letter-spacing: 0.15em;
+  margin-right: 0.52;
+  color: #000000;
+}
+.content-box .load-more {
+  text-align: center;
+}
+.content-box .load-more img {
+  width: 22px;
+  display: block;
+  margin: 1.56vw auto 8px;
+}
+.content-box .load-more span {
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.15em;
+  color: #999999;
+}

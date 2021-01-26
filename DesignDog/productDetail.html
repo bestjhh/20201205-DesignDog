@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>案例详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/productDetail.css"/>
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		
+		<main id='productDetail' v-cloak>
+			<div class="list-title">
+				<a href="awards.html" v-if='type == 1' style="padding-left: 0">获奖作品</a>
+				<a href="productList.html" v-else style="padding-left: 0">作品展馆</a>
+				<a :href="'productList.html?id='+pageData.type_id" v-if='pageData.work_type && pageData.work_type.type_name'> > {{ pageData.work_type.type_name }}</a>
+				<a>> {{ pageData.title }} </a>
+				</div>
+			<div class="content-box">
+				<div class="title thmeColor">{{ pageData.title }}</div>
+				<div class="info">{{ pageData.info }}</div>
+				<div class="info2 thmeColor" v-if='pageData.point'>{{ pageData.point }}</div>
+				<div class="video-box" v-if='pageData.video'>
+					<video :src="imgUrl + pageData.video" object-fit='cover' poster="" 
+					:style="{
+					'background': 'url('+imgUrl + pageData.cover + ') no-repeat center',
+					'background-size': 'cover'}">
+						当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+					</video>
+					<span class="iconfont icon-xiangxia1 thmeColor border"></span>
+				</div>
+				<div class="rich-box" v-if='pageData.content' v-html="pageData.content"></div>
+				<div class="other-box" v-if='pageData.more && pageData.more.length > 0'>
+					<div class="title_ thmeColor">OTHER WORKS</div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" v-for="(item,index) in pageData.more" :key='index' @click="getDetail(item.id)">
+								<div class="img-box" :style="{
+							'background': 'url('+imgUrl + item.cover + ') no-repeat center',
+							'background-size': 'cover'}"></div>
+								<div class="lines1 txt thmeColor">{{ item.title }}</div>
+							</div>
+						</div>
+						<!-- Add Pagination -->
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<div class="line"></div>
+			<a href="contactUs.html" class="more-box border thmeColor">
+				联系我们 contact<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		<footer></footer>
+		<script src="js/swiper-bundle.min.js"></script>
+		<script>
+			let that;
+			var vm = new Vue({
+				el: '#productDetail',
+				data: {
+					current: 0,
+					imgUrl: imgUrl,
+					pageData: '',
+					type:''
+				},
+				mounted() {
+					that = this;
+					let id = getUrlParam('id')
+					let type = getUrlParam('type')
+					if(type)
+						that.type = type
+					if(id){
+						that.getDetail(id)
+					}
+				},
+				methods:{
+					getDetail(id){
+						that.pageData = ''
+						let url = ''
+						if(that.type == 1){
+							url = '/api/award/detail'
+						}else{
+							url = '/api/work/detail'
+						}
+						window.scroll(0,0)
+						ajax(url,{
+							id: id
+						}).then(data=>{
+							if(data){
+								data.content = richTxt(data.content)
+								that.pageData = data
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper-container',{
+										pagination: {
+										   el: '.swiper-pagination'
+										},
+										slidesPerView: 2,
+										spaceBetween: 20,
+									})
+								},52)
+							}
+							$('.loding').hide()
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

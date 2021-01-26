@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title> </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/newDetail.css"/>
+		
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		
+		<main id='newDetail' v-cloak>
+			<div class="list-title">
+				<template v-if='type == 1'>
+					<a href="point.html">我们的观点 ></a>
+					<a v-if='pageData.article_type' :href="'point.html?id='+pageData.article_type.type_id">{{ pageData.article_type.type_name }}</a>
+				</template>
+				<template v-else>
+					<a href="aboutUs.html" style="padding-left: 0">关于我们 > </a>
+					<a href="newsList.html">新闻专栏</a>
+				</template>
+				> {{ pageData.title }}
+			 </div>
+			<div class="detail">
+				<div class="title thmeColor border-bottom">{{ pageData.title }}</div>
+				<div class="date thmeColor flex-box flex-between">
+					<span>{{ pageData.publish_time }}</span>
+					<span v-if='type == 1'>{{pageData.article_type.type_name}}</span>
+					<span v-else>新闻专栏</span>
+				</div>
+				<div class="info">{{ pageData.info }}</div>
+				<div class="rich-box"></div>
+				
+				<a href="javascript:history.back(-1)" class="back-box flex-box align-center thmeColor">
+					<span class="iconfont icon-xiangzuo"></span>
+					<span>返回当前文章的列表页</span>
+				</a>
+				
+				<div class="list" v-if='pageData.other && pageData.other.length > 0'>
+					<div class="title thmeColor">
+						<template v-if='type == 1'>关联观点</template>
+						<template v-else>关联新闻</template>
+						
+					</div>
+					<a @click="getDetail(item.id)" class="item" v-for="(item,i) in pageData.other" :key='i'>
+						<div class="img-box flex"  :style="{
+							'background': 'url('+imgUrl + item.cover+') no-repeat center',
+							'background-size': 'cover'}">
+						</div>
+						<div class="msg">
+							<div class="new-title thmeColor">{{ item.title }}</div>
+							<div class="flex-box flex-between">
+								<div class="new-date">{{ item.publish_time }}</div>
+								
+								<div class="new-date" v-if='type == 1 && item.article_type'>{{item.article_type.type_name}}</div>
+								<div class="new-date" v-else>新闻专栏</div>
+							</div>
+							<div class="new-info lines2">{{ item.info }}</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="line"></div>
+			<a href="productList.html" class="more-box border thmeColor">
+				查看案例 case<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		<footer></footer>
+	</body>
+	<script>
+		let that;
+		var vm = new Vue({
+			el: '#newDetail',
+			data: {
+				imgUrl: imgUrl,
+				pageData: '',
+				type: ''
+			},
+			mounted() {
+				that = this;
+				let id = getUrlParam('id')
+				let type = getUrlParam('type')
+				if(type){
+					that.type = type
+				}
+				if(id){
+					that.getDetail(id)
+				}
+			},
+			methods:{
+				showPhone(url){
+					$(".code").attr('src',that.imgUrl + that.pageData.qr_code)
+					showModel()
+				},
+				getDetail(id){
+					that.pageData = '';
+					let url = ''
+					if(that.type == 1){
+						url = '/api/article/detail'
+					}else{
+						url = '/api/news/detail'
+					}
+					window.scroll(0,0)
+					ajax(url,{
+						id: id
+					}).then(data=>{
+						if(data){
+							that.pageData = data
+							if(data.content){
+								let txt = richTxt(data.content)
+								$('.rich-box').html(txt)
+							}
+						}
+						$('.loding').hide()
+					})
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,287 @@
+#news .top-new {
+  display: block;
+}
+#news .top-new .img-box {
+  height: 56.27vw;
+}
+#news .top-new .msg {
+  padding: 2.9vw 4.8vw 6.4vw;
+}
+#news .top-new .top-mask {
+  position: relative;
+  height: 75.2vw;
+}
+#news .top-new .top-mask::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 29.33vw;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000);
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+}
+#news .top-new .img-box {
+  position: relative;
+  z-index: 3;
+}
+#news .top-new .img-box .msg {
+  position: relative;
+  z-index: 5;
+}
+#news .new-date {
+  font-weight: 300;
+  font-size: 2.93vw;
+  line-height: 125%;
+  /* identical to box height, or 14px */
+  color: #999999;
+}
+#news .new-title {
+  font-weight: 500;
+  font-size: 5.87vw;
+  line-height: 141%;
+  margin: 1.33vw 0;
+}
+#news .new-info {
+  font-size: 3.2vw;
+  line-height: 159.5%;
+  /* or 19px */
+  letter-spacing: 0.07em;
+}
+#news .search-box .box {
+  padding: 2.93vw 4.8vw;
+  font-size: 3.2vw;
+  line-height: 142%;
+}
+#news .search-box .box .className {
+  font-weight: 500;
+  opacity: 0.7;
+  padding-right: 3.2vw;
+  cursor: pointer;
+}
+#news .search-box .box .className:hover {
+  opacity: 1;
+}
+#news .search-box .box .picker {
+  cursor: pointer;
+  opacity: 0.7;
+}
+#news .search-box .box .picker .year {
+  padding: 0 2.5vw 0 3.2vw;
+}
+#news .search-box .box .picker:hover {
+  opacity: 1;
+}
+#news .search-box .box .show {
+  opacity: 1;
+}
+#news .search-box .box .icon-xiangxia {
+  font-weight: 400;
+}
+#news .search-box .box .search {
+  height: 6.93vw;
+}
+#news .search-box .box .search input {
+  border: none;
+  outline: none;
+  background: none;
+  height: 100%;
+  width: 13.87vw;
+  padding: 0 2.4vw;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 33;
+}
+#news .search-box .box .search .icon-box {
+  width: 6.93vw;
+  height: 100%;
+  position: relative;
+  z-index: 33;
+}
+#news .search-box .box .search .active {
+  width: 37.33vw;
+}
+#news .search-box .box .search .active + div {
+  background: linear-gradient(270deg, #CC964E 0%, #EEC988 100%);
+}
+#news .search-box .box .search .active + div span {
+  color: #131310;
+}
+#news .swiper-container {
+  margin: 0 4.8vw;
+  position: relative;
+}
+#news .swiper-container::before {
+  content: '';
+  right: 0;
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  z-index: 3;
+  background: linear-gradient(to left, #131310, rgba(0, 0, 0, 0));
+}
+#news .swiper-container .swiper-wrapper {
+  padding: 2.93vw 0;
+  font-size: 3.2vw;
+  line-height: 142%;
+}
+#news .swiper-container .swiper-wrapper .swiper-slide {
+  width: auto;
+}
+#news .swiper-container .swiper-wrapper .className {
+  font-weight: 500;
+  opacity: 0.7;
+  padding-right: 3.2vw;
+  cursor: pointer;
+}
+#news .swiper-container .swiper-wrapper .className:hover {
+  opacity: 1;
+}
+#news .swiper-container .swiper-wrapper .picker {
+  cursor: pointer;
+  opacity: 0.7;
+}
+#news .swiper-container .swiper-wrapper .picker .year {
+  padding: 0 2.5vw 0 3.2vw;
+}
+#news .swiper-container .swiper-wrapper .picker:hover {
+  opacity: 1;
+}
+#news .swiper-container .swiper-wrapper .show {
+  opacity: 1;
+}
+#news .swiper-container .swiper-wrapper .icon-xiangxia {
+  font-weight: 400;
+}
+#news .swiper-container .swiper-wrapper .search {
+  height: 6.93vw;
+}
+#news .swiper-container .swiper-wrapper .search input {
+  border: none;
+  outline: none;
+  background: none;
+  height: 100%;
+  width: 13.87vw;
+  padding: 0 2.4vw;
+  transition: all 0.3s;
+}
+#news .swiper-container .swiper-wrapper .search .icon-box {
+  width: 6.93vw;
+  height: 100%;
+}
+#news .swiper-container .swiper-wrapper .search .active {
+  width: 37.33vw;
+}
+#news .swiper-container .swiper-wrapper .search .active + div {
+  background: linear-gradient(270deg, #CC964E 0%, #EEC988 100%);
+}
+#news .swiper-container .swiper-wrapper .search .active + div span {
+  color: #131310;
+}
+#news .my-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 333;
+}
+#news .my-picker .swiper-container-box {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(19, 19, 16, 0.95);
+  border: 1px solid #EEC988;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0px 0px;
+}
+#news .my-picker .swiper-container-box .btn {
+  text-align: right;
+  padding-top: 2.4vw;
+  padding-right: 4.8vw;
+  margin-bottom: -10px;
+}
+#news .my-picker .swiper-container {
+  height: 56.53vw;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+#news .my-picker .swiper-container .swiper-slide {
+  height: 9.33vw;
+  line-height: 9.33vw;
+  text-align: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 4.8vw;
+  opacity: 0.6;
+}
+#news .my-picker .swiper-container .icon-xiangyou {
+  position: absolute;
+  top: 50%;
+  left: 11.73vw;
+}
+#news .my-picker .swiper-container .icon-xiangzuo {
+  position: absolute;
+  top: 50%;
+  right: 11.73vw;
+}
+#news .my-picker .swiper-container .p1 {
+  opacity: 1;
+}
+#news .my-picker .swiper-container .p1 .iconfont {
+  display: block;
+}
+#news .list {
+  padding: 4.8vw;
+  padding-bottom: 2.67vw;
+}
+#news .list .item {
+  margin-bottom: 8vw;
+  display: block;
+}
+#news .list .item .img-box {
+  height: 56.27vw;
+}
+#news .list .item .new-info {
+  color: white;
+  margin-top: 1.33vw;
+}
+#news .list2 {
+  padding: 0 4.8vw 4vw;
+  border-top: 0.5px dashed #EEC988;
+}
+#news .list2 .title {
+  font-weight: 600;
+  font-size: 5.7vw;
+  line-height: 153.5%;
+  margin-top: 6.5vw;
+  margin-bottom: 2vw;
+}
+#news .list2 .item {
+  padding: 5.33vw 0;
+}
+#news .list2 .item .img-box {
+  width: 27.73vw;
+  height: 18.67vw;
+  margin-right: 6.4vw;
+}
+#news .list2 .item .new-info {
+  font-size: 3.2vw;
+  line-height: 142%;
+  color: #FBFBFB;
+  margin-top: 2.5vw;
+}
+#news .list2 .item .icon-xiangyou {
+  margin-left: 5.33vw;
+}
+#news .list2 .item:nth-last-of-type(1) {
+  border-bottom: none!important;
+}
+#news .list2 .item:nth-last-of-type(1)::before {
+  display: none;
+}
+footer {
+  margin-top: 5.33vw;
+}

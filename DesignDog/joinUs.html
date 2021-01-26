@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>加入我们</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/join.css"/>
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		<main id='joinUs' v-cloak>
+			<div class="list-title flex-box align-center">首页 > 加入我们</div>
+			<!-- <div class="top-box" :style="{
+				'background': 'url('+imgUrl + 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbenyouhuifile.it168.com%2Fforum%2F201710%2F13%2F192829z24qnryx14pry464.jpg&refer=http%3A%2F%2Fbenyouhuifile.it168.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612945217&t=e34f42ac89b132392b9dd9958c086397) no-repeat center',
+				'background-size': 'cover'}">
+				<div class="title thmeColor">
+					给才华横溢的你<br>
+					一个广阔的平台
+				</div>
+				<div class="info thmeColor">
+					如果你是一个不甘平庸的创意鬼才<br>
+					激情澎湃的世间玩客<br>
+					高执行力，不甘寂寞的TeamWorker
+				</div>
+			</div> -->
+			
+			<div class="swiper-container" v-if='banner && banner.length > 0'>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide " v-for="(item,i) in banner" :key='i'>
+						<a :href="item.banner_url?item.banner_url:'javaScript:;'" class="top-box flex-box align-center" :style="{
+							'background': 'url('+imgUrl + item.banner_image + ') no-repeat center',
+							'background-size': 'cover'}">
+							<div>
+								<div class="title thmeColor" v-html="item.banner_title"></div>
+								<div class="info thmeColor" v-html="item.banner_info"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			
+			<div class="line" :class="{fixed: lineFixed}"></div>
+			<div class="contentt">
+				<!-- <div class="weNeew" v-if='detail.point'>
+					<div class="flex-box flex-between align-center">
+						<div class="flex-box align-center">
+							<span class="title-en">WE NEED </span>
+							<span class="title-zh">&nbsp;/ 希望你是</span>
+						</div>
+						<img src="img/dog-joinus.png" class="dog">
+					</div>
+					
+					<div class="list flex-box">
+						<div class="item" v-if="detail.point.point1">
+							<div class="lines1 title">FIRST OF ALL</div>
+							<div class="info" v-html="detail.point.point1"></div>
+							<div class="line"></div>
+							<div class="info2">我们需要的你是这样的</div>
+						</div>
+						<div class="item" v-if="detail.point.point2">
+							<div class="lines1 title">THE SECOND</div>
+							<div class="info" v-html="detail.point.point2"></div>
+							<div class="line"></div>
+							<div class="info2">我们需要的你是这样的</div>
+						</div>
+						<div class="item" v-if="detail.point.point3">
+							<div class="lines1 title">THE LAST POINT</div>
+							<div class="info" v-html="detail.point.point3"></div>
+							<div class="line"></div>
+							<div class="info2">我们需要的你是这样的</div>
+						</div>
+					</div>
+					
+				</div> -->
+				
+				
+				<div class="newJobs" v-if='detail.jobs && detail.jobs.length > 0'>
+					<div class="list">
+						<div class="item" v-for="(item,i) in detail.jobs" :key='i'>
+							<div class="flex-box align-center flex-between">
+								<div class="flex-box align-center">
+									<div class="title thmeColor">{{ item.position }}</div>
+									<div class="info flex-box align-center thmeColor"><span>{{ item.require }}</span><span>|</span><span>{{ item.salary }}</span></div>
+								</div>
+								<div class="btn border_ thmeColor flex-box flex-center align-center" @click="replay(item.resume_id)">
+									<span class="t">立即申请</span>
+								</div>
+							</div>
+							<div class="requres" :class="{active: current == i}">
+								<div class="requre-title">{{ item.title1 }}</div>
+								<div class="requre">
+									<div v-html="item.content1"></div>
+								</div>
+								<div class="requre-more flex-box" @click="check(i)">
+									<span>{{ current==i?"收起":"查看全部" }}</span>
+									<span class="iconfont icon-xiangxia1"></span>
+								</div>
+								<!-- <div class="requre" v-if='item.title2 && item.content2' style="margin-right: 0;"  :data-txt='item.title2'>
+									<div v-html="item.content2"></div>
+								</div> -->
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="line"></div>
+			<a href="contactUs.html" class="more-box border thmeColor">
+				联系我们 contact<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+			
+			<div id="modal-container">
+			  <div class="modal-background">
+			    <div class="modal border text-bg" @click.stop>
+				  <span class="iconfont icon-guanbi thmeColor" @click="close"></span>
+			      <div class="form-box">
+			      	<div class="item">
+						<div class="label thmeColor">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名*</div>
+			      		<input type="text" v-model="name" class="border thmeColor">
+			      	</div>
+					<div class="item">
+						<div class="label thmeColor">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄*</div>
+						<input type="number" max="120" min="15" v-model="age" class="border thmeColor">
+					</div>
+					<div class="item">
+						<div class="label thmeColor">联系电话*</div>
+						<input type="number" max="11" v-model="phone" class="border thmeColor">
+					</div>
+
+					<p class="thmeColor">简历附件</p>
+					
+					<div class="file flex-box align-center border">
+						<input type="file" name="" id="resume" @change="upload" accept=".xls,.doc,.txt,.pdf,.docx,.xlsx"/>
+						<p class="lines1 flex thmeColor" v-if='fileName'>{{ fileName }}</p>
+						<span class="iconfont icon-jiaruwomen-toudijianli thmeColor"></span>
+					</div>
+					
+					<div class="btn-phone thmeColor border flex-box align-center flex-center text-bg" @click="Resume">
+						<span class="iconfont icon-querentoudixuanzhong-01"></span>
+						<span>确认投递</span>
+					</div>
+					<!-- <div class="flex-box flex-between">
+						<div class="btn flex-box align-center btn1" @click="Resume">
+							<span>确认投递</span>
+							<img src="img/icon-throw.png" class="throw">
+							<img src="img/icon-throwing.png" class="throwing">
+						</div>
+						<div class="btn flex-box align-center flex-center" @click="close">
+							<span>暂不投递</span>
+						</div>
+					</div> -->
+					
+			      </div>
+			   
+				</div>
+			  </div>
+			</div>
+		</main>
+		<footer></footer>
+		<script src="js/swiper-bundle.min.js"></script>
+		<script>
+			let that,formData;
+			var vm = new Vue({
+				el: '#joinUs',
+				data: {
+					imgUrl: imgUrl,
+					detail:'',
+					banner:[],
+					fileName:'',
+					name:'',
+					age:'',
+					phone:'',
+					resume_id:'',
+					current: -1,
+					lineFixed: false
+				},
+				mounted() {
+					that = this;
+					that.getBanner()
+				},
+				methods:{
+					check(i){
+						if(that.current == i){
+							that.current = -1
+						}else{
+							that.current = i
+						}
+					},
+					upload(e){
+						that.fileName = e.target.value
+						formData = new FormData();
+						var name = $("#resume").val();
+						var files = $("#resume")[0].files[0];
+						formData.append("file", files);
+						formData.append("name", name);
+					},
+					replay(id){
+						that.resume_id = id
+						$('#modal-container').removeAttr('class').addClass("two");
+					},
+					Resume(){
+						if(!that.name.trim()){
+							showToast('请输入姓名！')
+							return
+						}
+						if(!that.age.trim()){
+							showToast('请输入年龄！')
+							return
+						}
+						if(!that.phone.trim()){
+							showToast('请输入电话！')
+							return
+						}
+						let reg = /^1[23456789][\d]{9}$/
+						if(!reg.test(that.phone)){
+							showToast('电话格式有误！')
+							return
+						}
+						if(!that.fileName.trim()){
+							showToast('请上传简历！')
+							return
+						}
+						upload('/api/upload/file',formData).then(fileUrl=>{
+							if(fileUrl){
+								ajax('/api/config/add_offer',{
+									name: that.name, // （名字）
+									sex: "1", //（0 女 1男）
+									age: that.age,
+									seniority: "1", //（工作年限）
+									tel: that.phone, //（联系电话）
+									annex: fileUrl, //（附件）
+									resume_id: that.resume_id, //（附件）
+								},'POST').then(res=>{
+									if(res){
+										showToast('提交成功！')
+										that.close()
+									}
+								})
+							}
+						})
+						
+					},
+					close(){
+						  $('#modal-container').addClass('out');
+						  $('body').removeClass('modal-active');
+					},
+					getDetail(){	
+						ajax('/api/config/resume','','','1').then(res=>{
+							if(res.data){
+								that.detail = res.data
+							}
+							if(res.banner){
+								that.banner = res.banner
+							}
+							// if()
+							$('.loding').hide()
+						})
+					},
+					getBanner(){
+						ajax('/api/banner/list',{
+							banner_type: 1, // 1 pc 2mobile
+							banner_position: 4 ,//1 首页 2关于我们 3 论坛
+						}).then(data=>{
+							console.log(data)
+							if(data){
+								that.banner = data;
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper-container');
+								},400)
+							}
+							that.getDetail()
+						})
+					}
+				}
+			})
+			$('input').on("focus",function(){
+				$('input').removeClass('focus')
+				$(this).addClass("focus")
+			}).blur(function(){
+				$('input').removeClass('focus')
+			})
+			$(window).scroll(function(){
+			    var scrollTop = $(this).scrollTop();
+			    // var scrollHeight = $(document).height();
+				// var windowHeight = $(this).height();
+				// if(scrollTop + windowHeight == scrollHeight){ // 滚到底了
+				
+				// }
+				var scrollHeight = $('.contentt')[0].offsetTop;
+				var headerHeight = $('header')[0].offsetHeight;
+			   if(scrollTop + headerHeight >= scrollHeight){
+					vm.lineFixed = true
+					$('.line.fixed').css('top',headerHeight+'px')
+			   }else{
+				   vm.lineFixed = false
+			   }
+			})
+		</script>
+	</body>
+
+	<script type="text/javascript">
+	</script>
+</html>

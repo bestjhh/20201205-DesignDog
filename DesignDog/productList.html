@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>作品展馆</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/productList.css"/>
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		
+		<main id='product' v-cloak>
+			<div class="list-title flex-box align-center">作品展馆</div>
+			
+			<div class="swiper-container swiper-container1 top-new" v-if='banner && banner.length > 0'>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="(item,i) in banner" :key='i'>
+						<div class="img-box flex flex-box" :style="{
+							'background': 'url('+imgUrl + item.banner_image +') no-repeat center',
+							'background-size': 'cover'}">
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			
+			<div class="swiper-container swiper-container2 border-bottom" v-if='typeList && typeList.length > 0' >
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<span class="className thmeColor" :class="{show: current == -1}" @click="typeCheck('',-1)">全部</span>
+					</div>
+					<div class="swiper-slide" v-for="(item,index) in typeList" :key='index' @click="typeCheck(item.type_id,index)">
+						<span class="className thmeColor" :key='index' :class="{show: current == index}" >{{ item.type_name }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="list">
+				<a v-if='list && list.length > 0' :href="'productDetail.html?id='+item.id" class="item" v-for="(item,index) in list" :key='index'>
+					<div class="img-box flex" :style="{
+						'background': 'url('+imgUrl + item.cover +') no-repeat center',
+						'background-size': 'cover'}">
+					</div>
+					<div class="msg">
+						<div class="new-title thmeColor">{{ item.title }}</div>
+						<div class="new-info lines2 thmeColor">{{ item.info }}</div>
+					</div>
+				</a>
+				
+				<div class="pagination flex-box thmeColor" v-if='pageCount > 1'>
+					<span class="iconfont" @click="prev" :class="{'icon-xiangzuo': page > 1}"></span>
+					<div class="flex">
+						<a :class="{active: page == i }" @click="tap(i)" v-for="i in pageCount">{{ i }}</a>
+					</div>
+					<span class="iconfont" @click="next" :class="{'icon-xiangyou': page < pageCount}"></span>
+				</div>
+				<div class="noData-box"></div>
+			</div>
+			
+			<div class="line" v-if='list && list.length > 0'></div>
+			<a href="contactUs.html" class="more-box border thmeColor">
+				联系我们 contact<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		
+		<footer></footer>
+		<script src="js/swiper-bundle.min.js"></script>
+		<script>
+			let current = getUrlParam("current")
+			let id = getUrlParam("id")
+			let that;
+			var vm = new Vue({
+				el: '#product',
+				data: {
+					imgUrl: imgUrl,
+					current: current?current:-1,
+					typeList:'',
+					list: [],
+					keywords:'',
+					limit: 8,
+					page:1,
+					type_id:id?id:'',
+					showMore: false,
+					pageCount: 0,
+					banner: []
+				},
+				methods:{
+					prev(){
+						if(that.page > 1){
+							that.page --
+							that.list = []
+							that.getList()
+						}
+					},
+					next(){
+						if(that.page < that.pageCount){
+							that.page ++
+							that.list = []
+							that.getList()
+						}
+					},
+					tap(i){
+						if(that.page != i){
+							that.page = i
+							that.list = []
+							that.getList()
+						}
+					},
+					getList(init){
+						$('.noData').remove()
+						ajax('/api/work/list',{
+							limit: that.limit,
+							page: that.page,	
+							keywords: that.keywords,
+							type_id: that.type_id
+						},'','1').then(res=>{
+							if(res.banner){
+								that.banner = res.banner
+								if(init == 1){
+									setTimeout(()=>{
+										var swiper1 = new Swiper('.swiper-container1',{
+											pagination: {
+											   el: '.swiper-pagination',
+											},
+											autoplay:true
+										});
+										var swiper = new Swiper('.swiper-container2',{
+											 slidesPerView: 'auto',
+											 centeredSlides : false,
+											 normalizeSlideIndex:false,
+											 slideToClickedSlide: true,
+											 spaceBetween: 24,
+											 initialSlide: that.current == -1?0:parseInt(that.current),
+											on: {
+											    slideChange: function(swiper){//当当前Slide切换时执行(activeIndex发生改变)
+													if(this.activeIndex < 4){
+														swiper.centeredSlides = false
+													}else{
+														swiper.centeredSlides = true
+													}
+												}
+											},
+										});
+									},33)
+								}
+							}
+							if(res.data){
+								that.list = that.list.concat(res.data);
+								// if(res.data.length >= that.limit){
+								// 	that.showMore = true
+								// }
+							}
+							that.pageCount = Math.ceil(res.total/that.limit)
+							if(that.list.length < 1 || !that.list){
+								if(that.type_id){
+									noData("没有找到关于“ " + that.typeList[that.current].type_name + "”的内容哦")
+								}
+								// else if(that.keywords){
+								// 	noData("没有找到关于“ " + that.keywords + "”的内容哦")
+								// }
+								else{
+									noData("啊哦 ~ 这里空空如也 ")
+								}
+							}
+							$('.nav-pro a').removeClass("active")
+							if(that.type_id){
+								$('.pro-'+that.type_id).addClass("active")
+							}
+							$('.loding').hide()
+						})
+					},
+					getType(ff){
+						ajax('/api/work/type').then(data=>{
+							that.typeList = data
+							if(that.current != -1){
+								that.type_id = data[that.current].type_id
+							}
+							if(ff == 1 && that.type_id){
+								data.forEach((item,index)=>{
+									if(item.type_id == that.type_id){
+										that.current = index
+									}
+								})
+							}
+							that.getList(ff)
+						})
+					},
+					search(e){
+						if(that.keywords){
+							that.page = 1
+							that.list = []
+							that.getList()
+						}else{
+							$('.search-box').addClass('thmeBg active');$('.search').focus()
+						}
+						
+					},
+					typeCheck(id,i){
+						that.type_id = id
+						that.current = i
+						that.keywords = ''
+						that.page = 1
+						that.list = []
+						that.getList()
+					},
+					blur(){
+						if(!that.keywords)
+							$('.search-box').removeClass('thmeBg active');
+					}
+				},
+				mounted() {
+					that = this;
+					that.getType(1)
+				}
+			})
+			// var flag = true;
+			// $(window).scroll(function(){
+			//     var scrollTop = $(this).scrollTop();
+			//     var scrollHeight = $(document).height();
+			//     var windowHeight = $(this).height();
+			//     if (flag==false)return false;
+			//     if(scrollTop + windowHeight == scrollHeight){ // 滚到底了
+					
+			//     }
+			// })
+		</script>
+	</body>
+
+	<script type="text/javascript">
+	</script>
+</html>

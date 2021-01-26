@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>我们的观点</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/news.css"/>
+	</head>
+	
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		<main id='news' v-cloak>
+			<div class="list-title flex-box align-center">我们的观点</div>
+			<div class="top-new " v-if='pageData.head'>
+				<a :href="'newsDetail.html?type=1&id='+pageData.head.id" class="img-box top-mask flex flex-box" :style="{
+					'background': 'url('+imgUrl + pageData.head.cover +') no-repeat center',
+					'background-size': 'cover'}">
+					<div class="msg flex-box flex-column flex-end" style="padding:0 4.8vw 0;">
+						<!-- <div class="new-date">{{ pageData.head.publish_time }}</div> -->
+						<div class="new-title thmeColor">{{ pageData.head.title }}</div>
+						<div class="new-info thmeColor lines2">{{ pageData.head.info }}</div>
+						<div class="thmeBg" style="height: 1px;width: 50%;margin: 6.4vw auto 0;"></div>
+					</div>
+				</a>
+			</div>
+			<div class="swiper-container border-bottom" v-if='pageData.article_type && pageData.article_type.length > 0'>
+				<div class="swiper-wrapper">
+					<!-- <div class="swiper-slide">
+						<span class="className thmeColor" :class="{show: current == -1}" @click="typeCheck('',-1)">全部</span>
+					</div> -->
+					<div class="swiper-slide" v-for="(item,index) in pageData.article_type" :key='index' @click="typeCheck(item.type_id,index)">
+						<span class="className thmeColor" :key='index' :class="{show: current == index}" >{{ item.type_name }}</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="list">
+				<a v-if='pageData.data && pageData.data.length > 0' :href="'newsDetail.html?type=1&id='+item.id" class="item" v-for="(item,index) in pageData.data" :key='index'>
+					<div class="img-box flex"  :style="{
+						'background': 'url('+imgUrl + item.cover +') no-repeat center',						
+						'background-size': 'cover'}">
+					</div>
+					<div class="msg">
+						<div class="new-title thmeColor">{{ item.title }}</div>
+						<div class="flex-box flex-between">
+							<div class="new-date">
+								{{ item.publish_time }}
+							</div>
+							<div class="new-date" v-if='item.article_type'>
+								{{ item.article_type.type_name }}
+							</div>
+						</div>
+						<div class="new-info lines2">{{ item.info }}</div>
+					</div>
+				</a>
+				<div class="pagination flex-box thmeColor" v-if='pageCount > -1'>
+					<span class="iconfont" @click="prev" :class="{'icon-xiangzuo': page > 1}"></span>
+					<div class="flex">
+						<a :class="{active: page == i }" @click="tap(i)" v-for="i in pageCount">{{ i }}</a>
+					</div>
+					<span class="iconfont" @click="next" :class="{'icon-xiangyou': page < pageCount}"></span>
+				</div>
+				<div class="noData-box"></div>
+			</div>
+			
+			<div class="list2" v-if='pageData.other && pageData.other.length > 0'>
+				<div class="thmeColor title">新闻专栏</div>
+				<a :href="'newsDetail.html?id='+item.id" class="item flex-box align-center border-bottom" v-for="(item,i) in pageData.other" :key='i'>
+					<div class="img-box"  :style="{
+						'background': 'url('+imgUrl + item.cover + ') no-repeat center',
+						'background-size': 'cover'}">
+					</div>
+					<div class="flex">
+						<div class="new-date">
+							{{ item.short_publish_time }} &nbsp;&nbsp; 新闻专栏
+						</div>
+						<div class="new-info lines2">{{ item.title }}</div>
+					</div>
+					<span class="iconfont icon-xiangyou thmeColor"></span>
+				</a>
+			</div>
+			
+			<div class="line"></div>
+		<!-- 	<a class="more border thmeColor">
+				查看更多 MORE<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a> -->
+			<div id="modal-container">
+			  <div class="modal-background">
+			    <div class="modal" @click.stop>
+			      <div class="code-box">
+			      	<img src="" class="code">
+			      	<p>微信扫一扫</p>
+			      	<p>精彩内容随时看</p>
+			      	<!-- <p>扫码成功</p>
+			      	<p>设计狗感谢您的关注</p> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</main>
+		<footer></footer>
+		<script src="js/swiper-bundle.min.js"></script>
+		<script src="js/swiper.animate1.0.3.min.js"></script>
+		<script>
+			let current = getUrlParam("current")
+			let id = getUrlParam("id")
+			var vm = new Vue({
+				el: '#news',
+				data: {
+					current: current?current:0,
+					newsHead:'',
+					imgUrl: imgUrl,
+					showMask: false,
+					list: [],
+					keywords:'',
+					limit: 8,
+					page:1,
+					pageCount: 0,
+					type_id: id?id:'',
+					showMore: false,
+					pageData:'',
+				},
+				mounted() {
+					that = this;
+					that.getList(1)
+				},
+				methods:{
+					typeCheck(id,i){
+						that.type_id = id
+						that.current = i
+						that.keywords = ''
+						that.page = 1
+						that.list = []
+						that.getList()
+					},
+					all(){
+						if(that.year){
+							that.year = ''
+							that.page = 1
+							that.list = []
+							that.getList()
+						}
+					},
+					prev(){
+						if(that.page > 1){
+							that.page --
+							that.list = []
+							that.getList()
+						}
+					},
+					next(){
+						if(that.page < that.pageCount){
+							that.page ++
+							that.list = []
+							that.getList()
+						}
+							
+					},
+					tap(i){
+						that.page = i
+						that.current = i
+						that.list = []
+						that.getList()
+					},
+					getList(first){
+						$('.noData').remove()
+						ajax('/api/article/list',{
+							limit: that.limit,
+							page: that.page,	
+							// keywords: that.keywords,
+							type_id: that.type_id
+						},'','1').then(res=>{
+							that.pageData = res
+							that.pageCount = Math.ceil(res.total/that.limit)
+							if(!res.data || res.data.length < 1){
+								noData("没有找到相关的内容哦")
+							}
+							if(first == 1){
+								if(that.type_id){
+									console.log(res.article_type)
+									res.article_type.forEach((item,index)=>{
+										if(item.type_id == that.type_id){
+											that.current = index
+										}
+									})
+								}
+								setTimeout(()=>{
+									var swiper = new Swiper('.swiper-container',{
+										 slidesPerView: 'auto',
+										 normalizeSlideIndex:false,
+										 // centeredSlides : true,
+										 slideToClickedSlide: true,
+										 spaceBetween: 30,
+										 initialSlide: that.current == -1?0:parseInt(that.current)+1
+									});
+								},40)
+							}
+							$('.nav-point a').removeClass("active")
+							if(that.type_id){
+								$('.point-'+that.type_id).addClass("active")
+							}
+							$('.loding').hide()
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

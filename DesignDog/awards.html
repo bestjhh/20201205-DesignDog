@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>获奖作品</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+		<meta name="description" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<meta name="keywords" content="中国 重庆 品牌设计 猪八戒 设计狗 博观达智 designdog DESIGNDOG 博观达智品牌营销策划有限公司 官网" />
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<script src="js/jquery-2.1.3.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/productList.css"/>
+	</head>
+
+	<body class="text-bg">
+		<header class="flex-box align-center"></header>
+		
+		<main id='product' v-cloak>
+			<div class="list-title flex-box align-center">获奖作品</div>
+			<div class="swiper-container swiper-container1 top-new" v-if='banner && banner.length > 0'>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="(item,i) in banner" :key='i'>
+						<a :href="item.banner_url?item.banner_url:'javaScript:;'" class="img-box flex flex-box" :style="{
+							'background': 'url('+imgUrl + item.banner_image +') no-repeat center',
+							'background-size': 'cover'}">
+						</a>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<div class="swiper-container border-bottom swiper-container2" v-if='typeList && typeList.length > 0'>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<span class="className thmeColor" :class="{show: current == -1}" @click="typeCheck('',-1)">全部</span>
+					</div>
+					<div class="swiper-slide" v-for="(item,index) in typeList" :key='index' @click="typeCheck(item.type_id,index)">
+						<span class="className thmeColor" :key='index' :class="{show: current == index}" >{{ item.type_name }}</span>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="list">
+				<a v-if='list && list.length > 0' :href="'productDetail.html?type=1&id='+item.id" class="item" v-for="(item,index) in list" :key='index'>
+					<div class="img-box flex" :style="{
+						'background': 'url('+imgUrl + item.cover +') no-repeat center',
+						'background-size': 'cover'}">
+					</div>
+					<div class="msg">
+						<div class="new-title thmeColor">{{ item.title }}</div>
+						<div class="new-info lines2 thmeColor">{{ item.info }}</div>
+					</div>
+				</a>
+				<div class="pagination flex-box thmeColor" v-if='pageCount > 1'>
+					<span class="iconfont" @click="prev" :class="{'icon-xiangzuo': page > 1}"></span>
+					<div class="flex">
+						<a :class="{active: page == i }" @click="tap(i)" v-for="i in pageCount">{{ i }}</a>
+					</div>
+					<span class="iconfont" @click="next" :class="{'icon-xiangyou': page < pageCount}"></span>
+				</div>
+				<div class="noData-box"></div>
+			</div>
+			
+			<div class="line"></div>
+			<a class="more-box border thmeColor">
+				联系我们 contact<span class="iconfont icon-jiantou_xiangyou_o"></span>
+			</a>
+		</main>
+		
+		<footer></footer>
+		
+	</body>
+	<script src="js/swiper-bundle.min.js"></script>
+	<script>
+		let that;
+		var vm = new Vue({
+			el: '#product',
+			data: {
+				imgUrl: imgUrl,
+				typeList:'',
+				list: [],
+				keywords:'',
+				limit: 10,
+				page:1,
+				type_id:'',
+				showMore: false,
+				pageCount: 0,
+				current: -1,
+				banner:''
+			},
+			methods:{
+				prev(){
+					if(that.page > 1)
+						that.page --
+				},
+				next(){
+					if(that.page < that.pageCount)
+						that.page ++
+				},
+				tap(i){
+					that.current = i
+				},
+				getList(init){
+					that.showMore = false
+					$('.noData').remove()
+					ajax('/api/award/list',{
+						limit: that.limit,
+						page: that.page,	
+						keywords: that.keywords,
+						type_id: that.type_id
+					},'','1').then(res=>{
+						that.pageCount = Math.ceil(res.total/that.limit)
+						// if(res.data){
+							// if(res.data.length >= that.limit){
+							// 	that.showMore = true
+							// }
+						// }
+						that.banner = res.banner
+						if(init == 1){
+							setTimeout(()=>{
+								var swiper1 = new Swiper('.swiper-container1',{
+									pagination: {
+									   el: '.swiper-pagination',
+									}
+								});
+								var swiper = new Swiper('.swiper-container2',{
+									slidesPerView: 'auto',
+									// centeredSlides : true,
+									normalizeSlideIndex:false,
+									slideToClickedSlide: true,
+									spaceBetween: 30,
+									// initialSlide: that.current == -1?0:parseInt(that.current)
+								});
+							},33)
+						}
+						that.list = res.data;
+						if(!that.list || that.list.length < 1){
+							if(that.type_id){
+								noData("没有找到关于“ " + that.typeList[that.current].type_name + "”的内容哦")
+							}else{
+								noData("还没有相关的内容哦")
+							}
+							// else{
+								// noData("啊哦 ~ 这里空空如也 ")
+							// }
+						}
+						$('.nav-active-6').addClass('active')
+						$('.loding').hide()
+					})
+				},
+				getType(init){
+					ajax('/api/award/type').then(data=>{
+						that.typeList = data
+						if(that.current != -1){
+							that.type_id = data[that.current].type_id
+						}
+						that.getList(init)
+					})
+				},
+				search(e){
+					if(that.keywords){
+						that.page = 1
+						that.list = []
+						that.getList()
+					}else{
+						$('.search-box').addClass('thmeBg active');$('.search').focus()
+					}
+				},
+				typeCheck(id,i){
+					that.type_id = id
+					that.current = i
+					that.keywords = ''
+					that.page = 1
+					that.list = []
+					that.getList()
+				},
+				blur(){
+					if(!that.keywords)
+						$('.search-box').removeClass('thmeBg active');
+				}
+			},
+			mounted() {
+				that = this;
+				that.getType(1)
+			}
+		})
+		// var flag = true;
+		// $(window).scroll(function(){
+		//     var scrollTop = $(this).scrollTop();
+		//     var scrollHeight = $(document).height();
+		//     var windowHeight = $(this).height();
+		//     if (flag==false)return false;
+		//     if(scrollTop + windowHeight == scrollHeight){ // 滚到底了
+				
+		//     }
+		// })
+	</script>
+</html>
